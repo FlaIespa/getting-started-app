@@ -1,3 +1,6 @@
+require('dotenv').config(); // Load environment variables from .env
+console.log('Database URL:', process.env.DATABASE_URL);
+
 const express = require('express');
 const app = express();
 const db = require('./persistence');
@@ -15,7 +18,7 @@ app.put('/items/:id', updateItem);
 app.delete('/items/:id', deleteItem);
 
 db.init().then(() => {
-    app.listen(3000, () => console.log('Listening on port 3000'));
+    app.listen(3000, '0.0.0.0', () => console.log('Listening on port 3000'));
 }).catch((err) => {
     console.error(err);
     process.exit(1);
